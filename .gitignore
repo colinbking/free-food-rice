@@ -3,6 +3,8 @@
 *.vscode
 *.cki
 *__pycache__
+credentials.*
+*.pickle
 
 # Compiled source #
 ###################

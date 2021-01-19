@@ -1,10 +1,8 @@
 # THIS IS NOT A FINISHED PROJECT YET
 still in progress:
-- google calendar api integration
-- making selenium script more robust 
+- making selenium script more robust
 - error handling
 - more measures so FB doesn't block us
-- a simple tkinter GUI so users can mooch freely with the push of a button
 
 # wtf-rice
 WTF(wheres the food) is a desktop app that detects free food events and automatically adds them to your calendar for your mooching pleasure.

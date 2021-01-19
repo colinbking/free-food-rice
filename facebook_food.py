@@ -16,7 +16,9 @@ import pandas as pd
 import json
 import psycopg2
 from pprint import pprint as pp
-
+import datetime as dt
+from pytz import timezone
+import string
 # DATABASE_URL = os.environ['DATABASE_URL']
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 # cur = conn.cursor()
@@ -218,9 +220,8 @@ class FoodScraper:
                         is_event = True
                         driver.execute_script("window.open('" + thing_link +"', 'new_window')")
                         to_visit.append(index)
-                print("got here end")
 
-                whole_thing = {"name" : thing_name, "desc" : desc_text, "event": is_event, "location":location, "time" : time, "food": ""}
+                whole_thing = {"name" : thing_name, "desc" : desc_text, "event": is_event, "location":location, "time" : time, "food": "", "added_date": str(dt.datetime.now(timezone('US/Central')))[0:11]}
                 all_things.append(whole_thing)
             
             # now update the events using the open tabs
@@ -235,7 +236,9 @@ class FoodScraper:
                 time, location = self.extract_location(driver)
                 driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
                 driver.implicitly_wait(1)
-                all_things[post_idx]["time"] = time
+                print("befre:   ", time)
+                all_things[post_idx]["time"] = ''.join(c for c in time if c not in {',', ';', ':'})
+                print("after;   ", all_things[post_idx]["time"])
                 all_things[post_idx]["location"] = location
                 
             return(all_things)
